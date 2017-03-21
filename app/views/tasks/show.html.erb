@@ -1,0 +1,7 @@
+<%= link_to "Go back", root_path %>
+
+<form action="/tasks/<%= @task.id %>" method="post">
+    <input type="hidden" name="_method" value patch />
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label>Task Title</label>
+    <input type="text" name="task[title]" value="<% @task.title%>"

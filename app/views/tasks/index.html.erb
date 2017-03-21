@@ -1,0 +1,99 @@
+<% content_for :nav_bar do %>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a>Home</a></li>
+        <li><a>To Do</a></li>
+        <li><a>Doing</a></li>
+        <li><a>Done</a></li>
+    </ul>
+<% end %>
+
+<% content_for :left_column do %>
+    <h1>To Do</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <% @to_do.each do |task| %>
+                <tr>
+                    <td><%= task.title %></td>
+                    <td><%= task.description %></td>
+                    <td><%= link_to "update", "/tasks/#{task.id}", data:{method: :patch} %>  </td>
+                    <!-- <td><a href="/tasks/id" data-method="PATCH" name="[task]"><%= task.id %></a></td> -->
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <hr />
+<% end %>
+
+<% content_for :middle_column do %>
+    <h1>Doing</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <% @doing.each do |task| %>
+                <tr>
+                    <td><%= task.title %></td>
+                    <td><%= task.description %></td>
+                    <td><%= link_to "update", "/tasks/#{task.id}", data:{method: :patch} %>  </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <hr />
+<% end %>
+
+<% content_for :right_column do %>
+    <h1>Done</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <% @done.each do |task| %>
+                <tr>
+                    <td><%= task.title %></td>
+                    <td><%= task.description %></td>
+                    <td><%= link_to "Delete", "/tasks/#{task.id}" , data:{ method: :delete, confirm: "Are you sure?"} %>  </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <hr />
+<% end %>
+
+<% content_for :add_task do %>
+    <form action="/tasks" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="task[title]" />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" rows="5" id="description" name="task[description]"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="task[status]">
+                <option>To Do</option>
+                <option>Doing</option>
+                <option>Done</option>
+            </select>
+        </div>
+
+        <input type="submit" class="btn btn-primary" name="Create Task" />
+        <br />
+        <br />  
+    </form>
+<% end %>

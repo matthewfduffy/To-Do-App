@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Three Column Layout</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-color: rgb(215, 210, 210)">
+    <!-- <div class="container" style="background-color: rgb(255, 255, 255)">
+    <div class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(204, 186, 255, 0.54)">
+          <%= yield :nav_bar%>
+      </div>
+  </div> -->
+  <div class="container" style="background-color: rgb(255, 255, 255)">
+        <div class="row">
+            <div class="col-md-4">
+                <%= yield :left_column %>
+            </div>
+            <div class="col-md-4">
+                <%= yield :middle_column %>
+            </div>
+            <div class="col-md-4">
+                <%= yield :right_column %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <%= yield :add_task %>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+<%= yield %>
+
+</body>
+</html>
